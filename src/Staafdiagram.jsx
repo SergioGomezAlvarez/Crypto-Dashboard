@@ -3,20 +3,33 @@ import App from './App';
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
+import { faEthereum } from '@fortawesome/free-brands-svg-icons'
+
 
 
 
 const Staafdiagram = ({ }) => {
 
-    const [Crypto, setCrypto] = useState([]);
-    const [Coins, setCoins] = useState([]);
+    const [crypto, setCrypto] = useState();
+    const [bitc, setBitc] = useState();
+    const [coins, setCoins] = useState([]);
+    const [example, setExample] = useState(
+        {
+            favcoin: 'x',
+            faccoin2: 'y'
+        }
+
+    );
 
     useEffect(() => {
         axios.get('https://api.coincap.io/v2/assets').then(function (response) {
             setCoins(response.data.data)
             const bitcoin = response.data.data.find(coins => coins.name === "Bitcoin")
-            setCrypto(bitcoin)
+            setBitc(bitcoin)
+            const ethereum = response.data.data.find(coins => coins.symbol === "ETH"); // Zoek Ethereum op basis van het symbool
+            setCrypto(ethereum);
             console.log(response.data.data)
+
         });
     }, []);
 
@@ -27,11 +40,16 @@ const Staafdiagram = ({ }) => {
                     <div className="blocks-container">
                         <div className="info-block-large">
                             <div className="block-info-container">
-                                <h1 className="block-info-text">Current Prices</h1>
+                                <h1 className="block-info-text">Trending Coins</h1>
                                 <h1 className="price-btc-text">
-                                    <FontAwesomeIcon icon={faBitcoin} /> Bitcoin price:
+                                    <FontAwesomeIcon icon={faBitcoin} size="2xl" style={{ color: "#f7931a" }} /> : {!bitc ? null : Number(bitc.priceUsd).toFixed(2)}
                                 </h1>
-                                <h1 className="price-btc-text">{Number(Crypto.priceUsd).toFixed(2)}</h1>
+                                <h1 className="price-btc-text">
+                                    <FontAwesomeIcon icon={faEthereum} size="2xl" style={{ color: "#9da7da", }} /> : {!crypto ? null : Number(crypto.priceUsd).toFixed(2)}
+                                </h1>
+                                {/* {coins && coins.map((item, index) => {
+                                       return   <div><FontAwesomeIcon icon={faBitcoin} size="xl" /> {item.id}</div>
+                                })} */}
                             </div>
                         </div>
                         <div className="info-block-large">
