@@ -1,22 +1,24 @@
 import axios from 'axios';
 import App from './App';
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 
 
 
 const Staafdiagram = ({ }) => {
-    
-const [Crypto, setCrypto] = useState([]);
-const [Coins, setCoins] = useState([]);
 
-useEffect(() => {
-  axios.get('https://api.coincap.io/v2/assets').then(function (response) {
-    setCoins(response.data.data)
-    const bitcoin = response.data.data.find(coins => coins.name === "Bitcoin")
-    setCrypto(bitcoin)
-    console.log(response.data.data)
-  });
-}, []);
+    const [Crypto, setCrypto] = useState([]);
+    const [Coins, setCoins] = useState([]);
+
+    useEffect(() => {
+        axios.get('https://api.coincap.io/v2/assets').then(function (response) {
+            setCoins(response.data.data)
+            const bitcoin = response.data.data.find(coins => coins.name === "Bitcoin")
+            setCrypto(bitcoin)
+            console.log(response.data.data)
+        });
+    }, []);
 
     return (
         <>
@@ -25,8 +27,10 @@ useEffect(() => {
                     <div className="blocks-container">
                         <div className="info-block-large">
                             <div className="block-info-container">
-                                <h1 className="block-info-text">Total Balance</h1>
-                                <h1 className="price-btc-text">Bitcoin price:</h1>
+                                <h1 className="block-info-text">Current Prices</h1>
+                                <h1 className="price-btc-text">
+                                    <FontAwesomeIcon icon={faBitcoin} /> Bitcoin price:
+                                </h1>
                                 <h1 className="price-btc-text">{Number(Crypto.priceUsd).toFixed(2)}</h1>
                             </div>
                         </div>
