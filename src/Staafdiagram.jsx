@@ -12,6 +12,8 @@ const Staafdiagram = ({ }) => {
 
     const [crypto, setCrypto] = useState();
     const [bitc, setBitc] = useState();
+    const [tether, setTeth] = useState();
+    const [binance, setBinance] = useState();
     const [coins, setCoins] = useState([]);
     const [example, setExample] = useState(
         {
@@ -29,7 +31,10 @@ const Staafdiagram = ({ }) => {
             const ethereum = response.data.data.find(coins => coins.symbol === "ETH"); // Zoek Ethereum op basis van het symbool
             setCrypto(ethereum);
             console.log(response.data.data)
-
+            const tether = response.data.data.find(coins => coins.name === "Tether");
+            setTeth(tether);
+            const binance = response.data.data.find(coins => coins.name === "BNB");
+            setBinance(binance);
         });
     }, []);
 
@@ -38,15 +43,21 @@ const Staafdiagram = ({ }) => {
             <div className="container-main">
                 <div className="container-dashboard">
                     <div className="blocks-container">
-                        <div className="info-block-large">
+                        <div className="info-block-large-1">
                             <div className="block-info-container">
-                                <h1 className="block-info-text">Trending Coins</h1>
+                                <h1 className="block-info-text-trending-coins">Trending Coins</h1>
                                 <h1 className="price-btc-text">
-                                    <FontAwesomeIcon icon={faBitcoin} size="2xl" style={{ color: "#f7931a" }} /> : {!bitc ? null : Number(bitc.priceUsd).toFixed(2)}
+                                    <img className="btc-logo" src="images/bitcoin-logo-big.png"></img> : {!bitc ? null : Number(bitc.priceUsd).toFixed(2)}
                                 </h1>
                                 <h1 className="price-btc-text">
-                                    <FontAwesomeIcon icon={faEthereum} size="2xl" style={{ color: "#9da7da", }} /> : {!crypto ? null : Number(crypto.priceUsd).toFixed(2)}
+                                    <img className="eth-logo" src="images/ethereum-logo-big.png"></img> : {!crypto ? null : Number(crypto.priceUsd).toFixed(2)}
                                 </h1>
+                                <div className="price-tether-text">
+                                    <img className="tether-logo" src="images/tether-logo-big.png"></img> : {!tether ? null : Number(tether.priceUsd).toFixed(2)}
+                                </div>
+                                <div className="price-binance-text">
+                                    <img className="binance-logo" src="images/binance-logo-big.png"></img> : {!binance ? null : Number(binance.priceUsd).toFixed(2)}
+                                </div>
                                 {/* {coins && coins.map((item, index) => {
                                        return   <div><FontAwesomeIcon icon={faBitcoin} size="xl" /> {item.id}</div>
                                 })} */}

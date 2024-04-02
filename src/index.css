@@ -189,6 +189,68 @@ button:focus-visible {
 }
 
 .price-btc-text{
+  display: flex;
   color: black;
   font-size: 1rem;
+}
+
+.price-binance-text{
+  display: flex;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+
+}
+
+.tether-logo{
+  width: 7%;
+  font-weight: bold;
+
+}
+
+.btc-logo{
+  width: 7%;
+  font-weight: bold;
+
+}
+
+.eth-logo{
+  width: 7%;
+  font-weight: bold;
+
+}
+
+.binance-logo{
+  width: 7%;
+  font-weight: bold;
+}
+
+.price-tether-text {
+  display: flex;
+  align-items: center; /* Om de afbeelding in het midden te centreren */
+  height: 100%; /* Om de containers dezelfde hoogte te geven */
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+
+}
+
+.block-info-text-trending-coins{
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Om de items in het midden te centreren */
+  height: 100%; /* Om de containers dezelfde hoogte te geven */
+  font-size: 1.2rem;
+  color: #0059ff;
+}
+
+.info-block-large-1{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 32%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 2.5px 5px #888888;
 }
