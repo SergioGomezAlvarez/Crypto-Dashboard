@@ -18,6 +18,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
+
 a:hover {
   color: #535bf2;
 }
@@ -46,9 +47,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -59,15 +62,17 @@ button:focus-visible {
     color: #213547;
     background-color: #ffffff;
   }
+
   a:hover {
     color: #747bff;
   }
+
   button {
     background-color: #f9f9f9;
   }
 }
 
-.container-main{
+.container-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,7 +82,7 @@ button:focus-visible {
   width: 100vw;
 }
 
-.container-dashboard{
+.container-dashboard {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -86,7 +91,7 @@ button:focus-visible {
   width: 80%;
 }
 
-.blocks-container{
+.blocks-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -95,7 +100,7 @@ button:focus-visible {
   width: 100%;
 }
 
-.info-block-large{
+.info-block-large {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,7 +112,7 @@ button:focus-visible {
 
 }
 
-.info-block-small{
+.info-block-small {
   width: 16%;
   height: 100%;
   border-radius: 5px;
@@ -115,7 +120,7 @@ button:focus-visible {
   box-shadow: 2.5px 5px #888888;
 }
 
-.footer-ad-container{
+.footer-ad-container {
   display: flex;
   flex-direction: row;
   width: 80%;
@@ -123,7 +128,7 @@ button:focus-visible {
   background-color: #ffffff;
 }
 
-.logo-container{
+.logo-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,11 +137,11 @@ button:focus-visible {
   height: 100%;
 }
 
-.logo{
+.logo {
   height: 100%;
 }
 
-.cashflow-text-container{
+.cashflow-text-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -145,19 +150,19 @@ button:focus-visible {
   height: 100%;
 }
 
-.cashflow-text{
+.cashflow-text {
   font-size: 1.8rem;
   color: #0059ff;
 
 }
 
-.powered-by-text{
+.powered-by-text {
   font-size: 1rem;
   font-weight: 300;
   color: #0059ff;
 }
 
-.time-container{
+.time-container {
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -165,21 +170,23 @@ button:focus-visible {
   padding-right: 30px;
 }
 
-.block-info-container{
+.block-info-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
-  height: 8%;
+  height: 90%;
+  /* Om ruimte te maken voor de coins */
   padding-left: 30px;
 }
 
-.block-info-text{
+
+.block-info-text {
   font-size: 1.2rem;
   color: #0059ff;
 }
 
-.block-info-small-container{
+.block-info-small-container {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -188,63 +195,43 @@ button:focus-visible {
   padding-left: 15px;
 }
 
-.price-btc-text{
+.price-btc-text img,
+.price-eth-text img,
+.price-tether-text img,
+.price-binance-text img,
+.price-solana-text img {
+  margin-right: 5px;
+  /* Ruimte tussen de afbeelding en de tekst */
+  width: 7%;
+  /* Pas de breedte van de afbeelding aan indien nodig */
+}
+
+.price-btc-text,
+.price-eth-text,
+.price-tether-text,
+.price-binance-text,
+.price-solana-text {
   display: flex;
-  color: black;
-  font-size: 1rem;
-}
-
-.price-binance-text{
-  display: flex;
-  color: black;
-  font-size: 1rem;
-  font-weight: bold;
-
-}
-
-.tether-logo{
-  width: 7%;
-  font-weight: bold;
-
-}
-
-.btc-logo{
-  width: 7%;
-  font-weight: bold;
-
-}
-
-.eth-logo{
-  width: 7%;
-  font-weight: bold;
-
-}
-
-.binance-logo{
-  width: 7%;
-  font-weight: bold;
-}
-
-.price-tether-text {
-  display: flex;
-  align-items: center; /* Om de afbeelding in het midden te centreren */
-  height: 100%; /* Om de containers dezelfde hoogte te geven */
+  align-items: center;
+  margin-bottom: 10px;
+  /* Om ruimte tussen de items te creëren */
   color: black;
   font-size: 1rem;
   font-weight: bold;
-
 }
 
-.block-info-text-trending-coins{
+.block-info-text-trending-coins {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Om de items in het midden te centreren */
-  height: 100%; /* Om de containers dezelfde hoogte te geven */
+  justify-content: center;
+  /* Om de titel in het midden te plaatsen */
+  align-items: center;
+  height: 10%;
+  /* Om de hoogte van de titel aan te passen */
   font-size: 1.2rem;
   color: #0059ff;
 }
 
-.info-block-large-1{
+.info-block-large-1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -253,4 +240,26 @@ button:focus-visible {
   border-radius: 5px;
   background-color: #ffffff;
   box-shadow: 2.5px 5px #888888;
+}
+
+.block-info-container-graph {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  height: 90%;
+  /* Om ruimte te maken voor de coins */
+  padding-left: 30px;
+}
+
+.info-block-large-graph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 67%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 2.5px 5px #888888;
+
 }
