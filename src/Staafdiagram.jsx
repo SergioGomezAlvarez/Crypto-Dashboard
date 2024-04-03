@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 import { faEthereum } from '@fortawesome/free-brands-svg-icons'
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 
 
 const Staafdiagram = ({ }) => {
@@ -48,7 +48,10 @@ const Staafdiagram = ({ }) => {
     useEffect(() => {
         axios.get('https://api.coincap.io/v2/assets/bitcoin/history?interval=d1')
             .then(response => {
-                const data = response.data.data.slice(6).reverse(); // Dit zal de eerste 6 items uit de array verwijderen en de volgorde van de resterende items omkeren
+                const data = response.data.data.slice(6).map(item => ({
+                    time: new Date(item.time).toLocaleDateString(),
+                    price: parseFloat(item.priceUsd)
+                })); // Kaart de API-gegevens naar de juiste structuur voor de grafiek
                 setHistoricalData(data);
             })
             .catch(error => {
@@ -56,7 +59,18 @@ const Staafdiagram = ({ }) => {
             });
     }, []);
 
-    
+    useEffect(() => {
+        axios.get('https://api.coincap.io/v2/assets')
+            .then(response => {
+                const bitcoin = response.data.data.find(coin => coin.id === "bitcoin");
+                setBitc(bitcoin);
+            })
+            .catch(error => {
+                console.error('Error fetching Bitcoin data:', error);
+            });
+    }, []);
+
+
     return (
         <>
             <div className="container-main">
@@ -64,7 +78,7 @@ const Staafdiagram = ({ }) => {
                     <div className="blocks-container">
                         <div className="info-block-large-1">
                             <div className="block-info-container">
-                                <h1 className="block-info-text-trending-coins">Trending Coins</h1>
+                                <h1 className="block-info-text-trending-coins">Trending Coins 🔥</h1>
                                 <h1 className="price-btc-text">
                                     <img className="btc-logo" src="images/bitcoin-logo-big.png"></img> : {!bitc ? null : Number(bitc.priceUsd).toFixed(2)}
                                 </h1>
@@ -87,12 +101,13 @@ const Staafdiagram = ({ }) => {
                         </div>
                         <div className="info-block-large-graph">
                             <div className="block-info-container-graph">
-                                <h1 className="block-info-text">Graph</h1>
-                                <LineChart width={750} height={250} data={[bitc].filter(Boolean)}>
-                                    <Line type="monotone" dataKey="priceUsd" stroke="#0059ff    " />
+                                <h1 className="block-info-text">Prize Chart (USD)</h1>
+                                <LineChart width={750} height={250} data={historicalData}>
+                                    <Line type="monotone" dataKey="price" stroke="#ffa500" dot={false} />
                                     <CartesianGrid stroke="#ccc" />
-                                    <XAxis dataKey="name" />
+                                    <XAxis dataKey="time" />
                                     <YAxis />
+                                    <Tooltip />
                                 </LineChart>
                             </div>
                         </div>
