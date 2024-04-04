@@ -15,18 +15,12 @@ const Staafdiagram = ({ }) => {
     const [binance, setBinance] = useState();
     const [solana, setSolana] = useState();
     const [coins, setCoins] = useState([]);
-    const [example, setExample] = useState(
-        {
-            favcoin: 'x',
-            faccoin2: 'y'
-        }
 
-    );
     const [historicalData, setHistoricalData] = useState([]);
+    const [selectedCurrency, setSelectedCurrency] = useState('bitcoin');
+
 
     // const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 100, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 },];
-
-
 
     useEffect(() => {
         axios.get('https://api.coincap.io/v2/assets').then(function (response) {
@@ -46,18 +40,33 @@ const Staafdiagram = ({ }) => {
     }, []);
 
     useEffect(() => {
-        axios.get('https://api.coincap.io/v2/assets/bitcoin/history?interval=d1')
+        axios.get(`https://api.coincap.io/v2/assets/${selectedCurrency}/history?interval=d1`)
             .then(response => {
                 const data = response.data.data.slice(6).map(item => ({
                     time: new Date(item.time).toLocaleDateString(),
                     price: parseFloat(item.priceUsd)
-                })); // Kaart de API-gegevens naar de juiste structuur voor de grafiek
+                }));
                 setHistoricalData(data);
             })
             .catch(error => {
                 console.error('Error fetching historical data:', error);
             });
-    }, []);
+    }, [selectedCurrency]);
+
+    const handleCurrencyChange = (currency) => {
+        setSelectedCurrency(currency);
+    };
+
+    const getLineColor = (currency) => {
+        const colors = {
+            bitcoin: "#f7931a",
+            ethereum: "#343434",
+            tether: "#28a17c",
+            bnb: "#f1b90c",
+            solana: "#4790c1"
+        };
+        return colors[currency] || "#888888"; // Standaard kleur
+    };
 
     useEffect(() => {
         axios.get('https://api.coincap.io/v2/assets')
@@ -101,9 +110,21 @@ const Staafdiagram = ({ }) => {
                         </div>
                         <div className="info-block-large-graph">
                             <div className="block-info-container-graph">
-                                <h1 className="block-info-text">Prize Chart (USD)</h1>
+                                <div className="header-container-graph">
+                                    <h1 className="block-info-text">Prize Chart (USD)</h1>
+                                    <div class="dropdown">
+                                        <button class="dropbtn">Selecteer een munteenheid</button>
+                                        <div class="dropdown-content">
+                                            <a href="#" onClick={() => handleCurrencyChange('bitcoin')}>Bitcoin</a>
+                                            <a href="#" onClick={() => handleCurrencyChange('ethereum')}>Ethereum</a>
+                                            <a href="#" onClick={() => handleCurrencyChange('tether')}>Tether</a>
+                                            <a href="#" onClick={() => handleCurrencyChange('binance-coin')}>BNB</a>
+                                            <a href="#" onClick={() => handleCurrencyChange('solana')}>Solana</a>
+                                        </div>
+                                    </div>
+                                </div>
                                 <LineChart width={750} height={250} data={historicalData}>
-                                    <Line type="monotone" dataKey="price" stroke="#ffa500" dot={false} />
+                                    <Line type="monotone" dataKey="price" stroke={getLineColor(selectedCurrency)} dot={false} />
                                     <CartesianGrid stroke="#ccc" />
                                     <XAxis dataKey="time" />
                                     <YAxis />
