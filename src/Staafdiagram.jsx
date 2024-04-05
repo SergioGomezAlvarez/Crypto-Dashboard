@@ -5,10 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 import { faEthereum } from '@fortawesome/free-brands-svg-icons'
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, PieChart, Pie, Cell } from 'recharts';
+import SearchCoins from './SearchCoins'; // Importeer de SearchCoins component
+
 
 
 const Staafdiagram = ({ }) => {
-
     const [crypto, setCrypto] = useState();
     const [bitc, setBitc] = useState();
     const [tether, setTeth] = useState();
@@ -83,7 +84,7 @@ const Staafdiagram = ({ }) => {
     }, []);
 
     if (!bitc) {
-        return <div>Loading...</div>;
+        return <div className="loading-text">Loading...</div>;
     }
 
     const pieChartData = [
@@ -178,8 +179,9 @@ const Staafdiagram = ({ }) => {
                             </div>
                         </div>
                         <div className="info-block-large">
-                            <div className="block-info-container">
-                                <h1 className="block-info-text">Debtors (past 6 months)</h1>
+                            <div className="block-info-container-search">
+                                <h1 className="block-info-text">Search Coins</h1>
+                                <SearchCoins coins={coins} /> {SearchCoins}
                             </div>
                         </div>
                         <div className="info-block-small">
