@@ -300,3 +300,8 @@ button:focus-visible {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+.pie-chart{
+  /* background-color: red; */
+  padding-left: 50px;
+}

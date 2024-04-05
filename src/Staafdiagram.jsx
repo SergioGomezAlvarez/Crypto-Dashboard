@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 import { faEthereum } from '@fortawesome/free-brands-svg-icons'
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, PieChart, Pie, Cell } from 'recharts';
 
 
 const Staafdiagram = ({ }) => {
@@ -18,6 +18,8 @@ const Staafdiagram = ({ }) => {
 
     const [historicalData, setHistoricalData] = useState([]);
     const [selectedCurrency, setSelectedCurrency] = useState('bitcoin');
+
+    const COLORS = ['#f7931a', '#343434', '#28a17c', '#28a17c', '#4790c1']; // Define COLORS array
 
 
     // const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 100, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 },];
@@ -62,9 +64,10 @@ const Staafdiagram = ({ }) => {
             bitcoin: "#f7931a",
             ethereum: "#343434",
             tether: "#28a17c",
-            bnb: "#f1b90c",
+            binance: "#28a17c",
             solana: "#4790c1"
         };
+        console.log(colors[currency]);
         return colors[currency] || "#888888"; // Standaard kleur
     };
 
@@ -79,6 +82,17 @@ const Staafdiagram = ({ }) => {
             });
     }, []);
 
+    if (!bitc) {
+        return <div>Loading...</div>;
+    }
+
+    const pieChartData = [
+        { name: 'bitcoin', value: parseFloat(bitc.priceUsd) },
+        { name: 'ethereum', value: parseFloat(crypto.priceUsd) },
+        { name: 'tether', value: parseFloat(tether.priceUsd) },
+        { name: 'binance', value: parseFloat(binance.priceUsd) },
+        { name: 'solana', value: parseFloat(solana.priceUsd) }
+    ];
 
     return (
         <>
@@ -137,7 +151,25 @@ const Staafdiagram = ({ }) => {
                     <div className="blocks-container">
                         <div className="info-block-large">
                             <div className="block-info-container">
-                                <h1 className="block-info-text">Solvency</h1>
+                                <h1 className="block-info-text">Trending Coins Overview</h1>
+                                <PieChart className="pie-chart" width={250} height={250}>
+                                    <Pie
+                                        data={pieChartData}
+                                        cx="50%"
+                                        cy="48%"
+                                        outerRadius={120}
+                                        fill="#8884d8"
+                                        dataKey="value"
+                                        labelLine={false}
+                                    >
+                                        {
+                                            pieChartData.map((entry, index) => (
+                                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                            ))
+                                        }
+                                    </Pie>
+                                    <Tooltip />
+                                </PieChart>
                             </div>
                         </div>
                         <div className="info-block-small">
