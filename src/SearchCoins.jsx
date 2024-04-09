@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import './index.css'
+import Staafdiagram from './Staafdiagram';
+
+
 const SearchCoins = ({ coins }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -20,7 +23,7 @@ const SearchCoins = ({ coins }) => {
                 placeholder="Search Coins..."
                 value={searchTerm}
                 onChange={handleChange}
-                className="search-bar" // Toegevoegd className
+                className="search-bar"
             />
             {searchTerm && (
                 <ul className="coin-search-list">

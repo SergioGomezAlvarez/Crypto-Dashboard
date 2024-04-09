@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBitcoin } from '@fortawesome/free-brands-svg-icons'
 import { faEthereum } from '@fortawesome/free-brands-svg-icons'
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, PieChart, Pie, Cell } from 'recharts';
-import SearchCoins from './SearchCoins'; // Importeer de SearchCoins component
+import SearchCoins from './SearchCoins';
+
 
 
 
@@ -20,10 +21,9 @@ const Staafdiagram = ({ }) => {
     const [historicalData, setHistoricalData] = useState([]);
     const [selectedCurrency, setSelectedCurrency] = useState('bitcoin');
 
+    const [selectedCoinData, setSelectedCoinData] = useState(null);
+
     const COLORS = ['#f7931a', '#343434', '#28a17c', '#28a17c', '#4790c1']; // Define COLORS array
-
-
-    // const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 100, pv: 2400, amt: 2400 }, { name: 'Page A', uv: 400, pv: 2400, amt: 2400 },];
 
     useEffect(() => {
         axios.get('https://api.coincap.io/v2/assets').then(function (response) {
@@ -173,9 +173,13 @@ const Staafdiagram = ({ }) => {
                                 </PieChart>
                             </div>
                         </div>
-                        <div className="info-block-small">
+                        <div className="info-block-small-data">
                             <div className="block-info-small-container">
-                                <h1 className="block-info-text">Debtors</h1>
+                                <h1 className="block-info-text">Coin Data</h1>
+                                <h1 className="coin-data-text">Name:  {!bitc ? null : (bitc.name)}</h1>
+                                <h1 className="coin-data-text">BTC VWAP 24Hr:  {!bitc ? null : Number(bitc.vwap24Hr).toFixed(2)}</h1>
+                                <h1 className="coin-data-text">BTC Volume 24Hr:  {!bitc ? null : Number(bitc.volumeUsd24Hr).toFixed(2)}</h1>
+
                             </div>
                         </div>
                         <div className="info-block-large">
@@ -184,9 +188,10 @@ const Staafdiagram = ({ }) => {
                                 <SearchCoins coins={coins} /> {SearchCoins}
                             </div>
                         </div>
-                        <div className="info-block-small">
+                        <div className="info-block-small-data">
                             <div className="block-info-small-container">
-                                <h1 className="block-info-text">Total Balance</h1>
+                                <h1 className="block-info-text">Balance</h1>
+                                <h1 className="current-balance">$11340</h1>
                             </div>
                         </div>
                     </div>

@@ -188,7 +188,7 @@ button:focus-visible {
 
 .block-info-small-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
 
   width: 100%;
@@ -369,4 +369,35 @@ button:focus-visible {
 
 .coin-search-list li:hover {
   background-color: #000000;
+  color: white;
+}
+
+.info-block-small-data{
+  width: 16%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 2.5px 5px #888888;
+}
+
+.current-balance{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 75%;
+  height: 100px;
+  color: black;
+  font-size: 2.7rem;
+}
+
+.coin-data-text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 75%;
+  height: 100px;
+  color: black;
+  font-size: 0.8rem;
 }
