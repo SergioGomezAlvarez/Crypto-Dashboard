@@ -10,7 +10,7 @@ import SearchCoins from './SearchCoins';
 
 
 
-const Staafdiagram = ({ }) => {
+const Dashboard = ({ }) => {
     const [crypto, setCrypto] = useState();
     const [bitc, setBitc] = useState();
     const [tether, setTeth] = useState();
@@ -23,7 +23,7 @@ const Staafdiagram = ({ }) => {
 
     const [selectedCoinData, setSelectedCoinData] = useState(null);
 
-    const COLORS = ['#f7931a', '#343434', '#28a17c', '#28a17c', '#4790c1']; // Define COLORS array
+    const COLORS = ['#f7931a', '#343434', '#28a17c', '#28a17c', '#4790c1'];
 
     useEffect(() => {
         axios.get('https://api.coincap.io/v2/assets').then(function (response) {
@@ -118,9 +118,7 @@ const Staafdiagram = ({ }) => {
                                 <h1 className="price-btc-text">
                                     <img className="solana-logo" src="images/solana-logo-big.png"></img> : {!solana ? null : Number(solana.priceUsd).toFixed(2)}
                                 </h1>
-                                {/* {coins && coins.map((item, index) => {
-                                       return   <div><FontAwesomeIcon icon={faBitcoin} size="xl" /> {item.id}</div>
-                                })} */}
+
                             </div>
                         </div>
                         <div className="info-block-large-graph">
@@ -128,7 +126,7 @@ const Staafdiagram = ({ }) => {
                                 <div className="header-container-graph">
                                     <h1 className="block-info-text">Prize Chart (USD)</h1>
                                     <div class="dropdown">
-                                        <button class="dropbtn">Selecteer een munteenheid</button>
+                                        <button class="dropbtn">Select Coin</button>
                                         <div class="dropdown-content">
                                             <a href="#" onClick={() => handleCurrencyChange('bitcoin')}>Bitcoin</a>
                                             <a href="#" onClick={() => handleCurrencyChange('ethereum')}>Ethereum</a>
@@ -179,6 +177,7 @@ const Staafdiagram = ({ }) => {
                                 <h1 className="coin-data-text">Name:  {!bitc ? null : (bitc.name)}</h1>
                                 <h1 className="coin-data-text">BTC VWAP 24Hr:  {!bitc ? null : Number(bitc.vwap24Hr).toFixed(2)}</h1>
                                 <h1 className="coin-data-text">BTC Volume 24Hr:  {!bitc ? null : Number(bitc.volumeUsd24Hr).toFixed(2)}</h1>
+                                <h1 className="coin-data-text">BTC Market Cap:  {!bitc ? null : Number(bitc.marketCapUsd).toFixed(2)}</h1>
 
                             </div>
                         </div>
@@ -191,7 +190,7 @@ const Staafdiagram = ({ }) => {
                         <div className="info-block-small-data">
                             <div className="block-info-small-container">
                                 <h1 className="block-info-text">Balance</h1>
-                                <h1 className="current-balance">$11340</h1>
+                                <h1 className="current-balance" id="randomNumber">${!solana ? null : Number(solana.priceUsd).toFixed(2)}</h1>
                             </div>
                         </div>
                     </div>
@@ -216,4 +215,4 @@ const Staafdiagram = ({ }) => {
     )
 }
 
-export default Staafdiagram;
+export default Dashboard;

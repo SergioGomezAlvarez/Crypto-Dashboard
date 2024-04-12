@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './index.css'
-import Staafdiagram from './Staafdiagram';
+import Dashboard from './Dashboard';
 
 
 const SearchCoins = ({ coins }) => {
@@ -9,7 +9,6 @@ const SearchCoins = ({ coins }) => {
 
     const handleChange = (event) => {
         setSearchTerm(event.target.value);
-        // Filter de munten op basis van de zoekterm
         const results = coins.filter(coin =>
             coin.name.toLowerCase().includes(event.target.value.toLowerCase())
         );
